@@ -8,34 +8,34 @@
 #include "tlx493d_types.h"
 
 
-/** Raw Data Calculation. */
-void tlx493d_gen_2_calculateRawTemperature(
-    TLx493D_t* sensor, uint8_t tempMSBBF, uint8_t tempLSBBF, int16_t* temperature
-);
-void tlx493d_gen_2_calculateRawMagneticField(
-    TLx493D_t* sensor,
-    uint8_t bxMSBBF, uint8_t bxLSBBF, uint8_t byMSBBF, uint8_t byLSBBF, uint8_t bzMSBBF, uint8_t bzLSBBF,
-    int16_t* x, int16_t* y, int16_t* z
-);
-
-
-/** Processed Data Calculation. */
-void tlx493d_gen_2_calculateTemperature(
-    TLx493D_t* sensor, uint8_t tempMSBBF, uint8_t tempLSBBF, double* temperature
-);
-void tlx493d_gen_2_calculateMagneticField(
-    TLx493D_t* sensor,
-    uint8_t bxMSBBF, uint8_t bxLSBBF, uint8_t byMSBBF, uint8_t byLSBBF, uint8_t bzMSBBF, uint8_t bzLSBBF,
-    double* x, double* y, double* z
-);
-
-
-/** Configuration Control. */
+/** 1. Register & Bitfield Access. */
 bool tlx493d_gen_2_setOneConfigBitfield(TLx493D_t* sensor, uint8_t bfBF, uint8_t cpBF, uint8_t bfVal);
 bool tlx493d_gen_2_setTwoConfigBitfields(
     TLx493D_t* sensor, uint8_t firstBF, uint8_t secondBF, uint8_t cpBF, uint8_t firstVal, uint8_t secondVal
 );
 
+
+/** 2. Sensor Data Access. */
+void tlx493d_gen_2_calculateRawTemperature(
+    const TLx493D_t* sensor, uint8_t tempMSBBF, uint8_t tempLSBBF, int16_t* temperature
+);
+void tlx493d_gen_2_calculateRawMagneticField(
+    const TLx493D_t* sensor,
+    uint8_t bxMSBBF, uint8_t bxLSBBF, uint8_t byMSBBF, uint8_t byLSBBF, uint8_t bzMSBBF, uint8_t bzLSBBF,
+    int16_t* x, int16_t* y, int16_t* z
+);
+
+void tlx493d_gen_2_calculateTemperature(
+    const TLx493D_t* sensor, uint8_t tempMSBBF, uint8_t tempLSBBF, double* temperature
+);
+void tlx493d_gen_2_calculateMagneticField(
+    const TLx493D_t* sensor,
+    uint8_t bxMSBBF, uint8_t bxLSBBF, uint8_t byMSBBF, uint8_t byLSBBF, uint8_t bzMSBBF, uint8_t bzLSBBF,
+    double* x, double* y, double* z
+);
+
+
+/** 3. Sensor Configuration. */
 bool tlx493d_gen_2_setMeasurement(
     TLx493D_t* sensor, uint8_t dtBF, uint8_t amBF, uint8_t cpBF, TLx493D_MeasurementType_t val
 );
@@ -59,14 +59,13 @@ bool tlx493d_gen_2_setUpdateRate(TLx493D_t* sensor, uint8_t fpBF, uint8_t prdBF,
 bool tlx493d_gen_2_hasValidData(const TLx493D_t* sensor, uint8_t modeBF, uint8_t pd3BF, uint8_t pd0BF);
 bool tlx493d_gen_2_isFunctional(const TLx493D_t* sensor);
 
-
-/** Power & Wake-Up Control. */
 bool tlx493d_gen_2_writeConfigurationRegisters(TLx493D_t* sensor);
+
 bool tlx493d_gen_2_isWakeUpEnabled(const TLx493D_t* sensor, uint8_t waBF);
 bool tlx493d_gen_2_enableWakeUpMode(TLx493D_t* sensor, uint8_t tstBF, uint8_t wuBF, uint8_t cpbBF);
 bool tlx493d_gen_2_disableWakeUpMode(TLx493D_t* sensor, uint8_t wuBF, uint8_t cpbBF);
 
-bool tlx493d_gen_2_setThreshold(TLx493D_t* sensor, uint8_t msbsBF, uint8_t lsbsBF, int16_t threshold12Bits);
+bool tlx493d_gen_2_setThreshold(const TLx493D_t* sensor, uint8_t msbsBF, uint8_t lsbsBF, int16_t threshold12Bits);
 bool tlx493d_gen_2_setWakeUpThresholds(
     TLx493D_t* sensor, uint8_t cpBF,
     uint8_t xlMSBBF, uint8_t xlLSBBF, uint8_t xhMSBBF, uint8_t xhLSBBF,
@@ -84,11 +83,7 @@ bool tlx493d_gen_2_setWakeUpThresholdsAsInteger(
 );
 
 
-/** Software Reset. */
-bool tlx493d_gen_2_softwareReset(TLx493D_t* sensor);
-
-
-/** Utilities. */
+/** 4. Utilities. */
 uint8_t tlx493d_gen_2_calculateFuseParity(const TLx493D_t* sensor, uint8_t fpBF, uint8_t prdBF);
 uint8_t tlx493d_gen_2_calculateBusParity(const TLx493D_t* sensor, uint8_t to);
 uint8_t tlx493d_gen_2_calculateConfigurationParity(const TLx493D_t* sensor, uint8_t cpBF);
@@ -100,7 +95,6 @@ bool tlx493d_gen_2_hasValidConfigurationParity(const TLx493D_t* sensor, uint8_t 
 
 bool tlx493d_gen_2_hasValidIICadr(const TLx493D_t* sensor, uint8_t idBF, uint8_t iicAdrBF);
 bool tlx493d_gen_2_hasValidTBit(const TLx493D_t* sensor, uint8_t tBF);
-
 
 uint8_t tlx493d_gen_2_selectIICAddress(const TLx493D_t* sensor, TLx493D_IICAddressType_t addr);
 
