@@ -1,0 +1,3 @@
+[submodule "tlx493d-arduino"]
+	path = tlx493d-arduino
+	url = git@github.com:Infineon/arduino-xensiv-3d-magnetic-sensor-tlx493d.git

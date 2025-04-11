@@ -1,0 +1,8 @@
+version: "0.1.0"
+description: Driver for the XENSIV 3D magnetic sensor TLx493D series.
+url: https://github.com/davidli218/esp-idf-xensiv-tlx493d/tree/master/
+issues: https://github.com/davidli218/esp-idf-xensiv-tlx493d/issues
+repository: git://github.com/davidli218/esp-idf-xensiv-tlx493d.git
+dependencies:
+  idf: ">=5.0"
+  cmake_utilities: "0.*"
