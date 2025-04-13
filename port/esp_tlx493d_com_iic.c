@@ -3,13 +3,15 @@
 
 #include <stdlib.h>
 
-/** project includes. */
-#include "Logger.h"
-
 /** ESP-IDF port includes. */
 #include "esp_tlx493d_base_types.h"
 #include "esp_tlx493d_com_iic.h"
 
+/** ESP-IDF includes. */
+#include "esp_log.h"
+
+
+static const char* TAG = "tlx493d_com_iic";
 
 static bool initIIC(TLx493D_t* sensor) {
     const i2c_device_config_t i2c_dev_config = {
@@ -53,7 +55,7 @@ static bool transferIIC(TLx493D_t* sensor, uint8_t* txBuffer, uint8_t txLen, uin
 static void setReadAddressIIC(TLx493D_t* sensor, uint8_t address) {
     (void)sensor;
     (void)address;
-    logWarn("Function 'setReadAddressIIC' not supported !");
+    ESP_LOGW(TAG, "Function 'setReadAddressIIC' not supported !");
 }
 
 static TLx493D_ComLibraryFunctions_t comLibFuncs_iic = {
