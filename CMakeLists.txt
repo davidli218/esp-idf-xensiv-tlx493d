@@ -1,3 +1,4 @@
+# Set core source files for TLx493D driver
 set(tlx493d_core_srcs
     "tlx493d-arduino/src/tlx493d.c"
     "tlx493d-arduino/src/tlx493d_common.c"
@@ -13,16 +14,29 @@ set(tlx493d_core_srcs
     "tlx493d-arduino/src/TLx493D_P3I8.c"
 )
 
+# Set ESP-IDF platform-specific adaptation layer source files
 set(tlx493d_esp_srcs
     "port/esp_tlx493d_com_interface.c"
     "port/esp_tlx493d_com_iic.c"
     "port/esp_tlx493d_logger.c"
 )
 
+# Set include paths visible to other components
+SET(include_dirs
+    "include"
+    "port/include"
+)
+
+# Set include paths visible only to this component
+SET(priv_include_dirs
+    "tlx493d-arduino/src"
+)
+
+
 idf_component_register(
     SRCS ${tlx493d_core_srcs} ${tlx493d_esp_srcs}
-    INCLUDE_DIRS "include" "port/include"
-    PRIV_INCLUDE_DIRS "tlx493d-arduino/src"
+    INCLUDE_DIRS ${include_dirs}
+    PRIV_INCLUDE_DIRS ${priv_include_dirs}
     REQUIRES driver
 )
 
